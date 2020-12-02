@@ -25,11 +25,12 @@ public class Asignatura {
 
 	private String nombre;
 
-	@JsonIgnoreProperties(value = { "hijos" }, allowSetters = true)
+	//"handler", "hibernateLazyInitializer" se usan debido a un problema con el proxy de hibernate
+	@JsonIgnoreProperties(value= {"hijos", "handler", "hibernateLazyInitializer"})
 	@ManyToOne(fetch = FetchType.LAZY)
 	private Asignatura padre;
 
-	@JsonIgnoreProperties(value = { "padre" }, allowSetters = true)
+	@JsonIgnoreProperties(value = {"padre", "handler", "hibernateLazyInitializer"}, allowSetters = true)
 	@OneToMany(fetch = FetchType.LAZY, mappedBy = "padre", cascade = CascadeType.ALL)
 	private List<Asignatura> hijos;
 	
